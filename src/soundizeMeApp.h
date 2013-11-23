@@ -2,13 +2,14 @@
 
 #include "ofMain.h"
 #include "ball.h"
+#include <vector>
 
 class soundizeMeApp : public ofBaseApp{
 	public:
 		void setup();
 		void update();
 		void draw();
-		
+
 		void keyPressed(int key);
 		void keyReleased(int key);
 		void mouseMoved(int x, int y);
@@ -18,6 +19,7 @@ class soundizeMeApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+		void addBall();
 	private:
-		 Ball theBall;
+		std::vector<Ball> 	m_balls;
 };

@@ -1,23 +1,18 @@
 #include "ball.h"
  
-Ball::Ball(){
-    // Set the initial color
-    color.set( ofRandom(255), ofRandom(255), ofRandom(255));
- 
-    // Initial x position of the ball
-    x = ofRandom( ofGetWindowWidth() ); 
- 
-    // Initial y position of the ball
-    y = ofRandom( ofGetWindowHeight() ); 
+Ball::Ball(ofVec2f _location,ofVec2f _velocity,ofColor _color){
+	location 	= 	_location;
+	velocity 	= 	_velocity;
+	color 		= 	_color;
 }
  
-void Ball::moveTo(int _xDestiny, int _yDestiny){
-    x += ( _xDestiny - x )*0.1;
-    y += ( _yDestiny - y )*0.1;
+void Ball::update(){
+	velocity = velocity + acceleration;
+	location = location + velocity;
 }
  
 void Ball::draw(){
     ofSetColor(color);
     ofFill();
-    ofCircle( x, y, 30);
+    ofCircle(location.x, location.y, 30);
 }

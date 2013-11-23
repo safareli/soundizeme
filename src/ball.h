@@ -5,16 +5,12 @@
  
 class Ball {
 public:
-        // Constructor
-        Ball();     
+        Ball(ofVec2f _location,ofVec2f _velocity,ofColor _color);
  
-        // Methods
-        void moveTo(int _xDestiny, int _yDestiny);
+        void update();
         void draw();
  
-        // Properties
-        int x;
-        int y;
+        ofVec2f location, velocity, acceleration;
         ofColor color;
 };
 #endif
