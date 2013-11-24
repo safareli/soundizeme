@@ -5,12 +5,13 @@
  
 class Ball {
 public:
-        Ball(ofVec2f _location,ofVec2f _velocity,ofColor _color);
+        Ball(ofVec2f _location,ofVec2f _velocity,ofColor _color,float _radius);
  
-        void update();
+        void update(float vx,float vy,float r ,float c,bool debag);
         void draw();
  
         ofVec2f location, velocity, acceleration;
         ofColor color;
+        float radius;
 };
 #endif

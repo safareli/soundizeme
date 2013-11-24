@@ -19,7 +19,10 @@ class soundizeMeApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-		void addBall();
 	private:
 		std::vector<Ball> 	m_balls;
+		ofSoundPlayer 		m_audio;
+		float *				m_fftSmoothed;
+		int 				m_nBandsToGet;
+		bool 				m_debagFrame;
 };

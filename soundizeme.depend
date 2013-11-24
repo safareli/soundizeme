@@ -1,7 +1,7 @@
 # depslib dependency file v1.0
 1376280832 source:c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\icon.rc
 
-1385226248 source:c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\src\main.cpp
+1385249002 source:c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\src\main.cpp
 	"ofMain.h"
 	"soundizeMeApp.h"
 
@@ -1475,12 +1475,12 @@
 	"ofCamera.h"
 	"ofEvents.h"
 
-1385237535 c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\src\soundizemeapp.h
+1385252794 c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\src\soundizemeapp.h
 	"ofMain.h"
 	"ball.h"
 	<vector>
 
-1385234500 source:c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\src\soundizemeapp.cpp
+1385253443 source:c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\src\soundizemeapp.cpp
 	"soundizeMeApp.h"
 
 1385232022 c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\src\core\element\element.h
@@ -1533,9 +1533,9 @@
 	<cstdlib>
 	<ctime>
 
-1385235911 c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\src\ball.h
+1385247594 c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\src\ball.h
 	"ofMain.h"
 
-1385236050 source:c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\src\ball.cpp
+1385251638 source:c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\src\ball.cpp
 	"ball.h"
 
