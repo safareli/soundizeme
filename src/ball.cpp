@@ -31,14 +31,14 @@ void Ball::update(float vx,float vy,float r ,float c,float* params){
 	if (r != 0){
 		ofColor icolor;
 	    icolor.setHex(ofMap(r, 0, 0.35, 0, 255*255*255));
-	    color.lerp(icolor,0.2);
+	    color.lerp(icolor,0.175); //params[0]
 	};
 	ofColor disiredColor = ofColor(
 		ofMap(ofNoise(noiseR), 0, 1, 0, 255),
 		ofMap(ofNoise(noiseG), 0, 1, 0, 255),
 		ofMap(ofNoise(noiseB), 0, 1, 0, 255)
 	);
-	color.lerp(disiredColor,0.2);
+	color.lerp(disiredColor,0.355); //params[1]
 	if(color.getBrightness() < 150)
 		color.setBrightness(150);
 
@@ -60,9 +60,9 @@ void Ball::update(float vx,float vy,float r ,float c,float* params){
 	location = location + velocity;
 	velocity.limit(3);
 	acceleration = acceleration * 0;
-	noiseR += 0.2;
-	noiseG += 0.2;
-	noiseB += 0.2;
+	noiseR += 0.02;
+	noiseG += 0.02;
+	noiseB += 0.02;
 
 
 }
