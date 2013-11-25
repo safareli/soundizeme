@@ -9,62 +9,70 @@ Ball::Ball(ofVec2f _location,ofVec2f _velocity,ofColor _color,float _radius){
     noiseB		=	ofRandom(5000);
 
 }
+void Ball::updateColor(float fftValue){
+	if (fftValue != 0){
+	    color.lerp(ofColor::fromHex(ofMap(fftValue, 0, 0.35, 0, 255*255*255)),FFT_COLOR_LERP);
+	}
 
-void Ball::update(float vx,float vy,float r ,float c,float* params){
-
-// fftColorLerp
-// noiseColorLerp
-// noiseStep
-
-
-        //limit r to 0.35
-	r = (r > 0.5) ? 0.5 :r;
-	radius = ofMap(r, 0, 0.5, 10, 50);
-
-
-	float angle =ofMap(vy, 0, 0.34, 0,TWO_PI);
-	acceleration.set(sin(angle),cos(angle));
-	acceleration *=ofMap(vy, 0, 0.34, 0, 5);
-	if (velocity.dot(acceleration) < 0.9)
-        acceleration /= radius;
-
-	if (r != 0){
-		ofColor icolor;
-	    icolor.setHex(ofMap(r, 0, 0.35, 0, 255*255*255));
-	    color.lerp(icolor,0.175); //params[0]
-	};
-	ofColor disiredColor = ofColor(
+	color.lerp(ofColor(
 		ofMap(ofNoise(noiseR), 0, 1, 0, 255),
 		ofMap(ofNoise(noiseG), 0, 1, 0, 255),
 		ofMap(ofNoise(noiseB), 0, 1, 0, 255)
-	);
-	color.lerp(disiredColor,0.355); //params[1]
-	if(color.getBrightness() < 150)
-		color.setBrightness(150);
+	),NOISE_COLOR_LERP);
+	
+	if(color.getBrightness() < MIN_BRIGHTNESS)
+		color.setBrightness(MIN_BRIGHTNESS);
+	if(color.getSaturation() < MIN_SATURATION)
+		color.setSaturation(MIN_SATURATION);
 
-	if(color.getSaturation() < 100)
-		color.setSaturation(100);
 
+	noiseR += NOISE_STEP;
+	noiseG += NOISE_STEP;
+	noiseB += NOISE_STEP;
+}
 
-	if (location.x > ofGetWidth() + radius*2)
-        location.x  =   -radius*2;
-	else if (location.x < -radius*2)
-        location.x  =  ofGetWidth() + radius*2;
+void Ball::checkEdges(){
+	float diameter = radius*2;
+	if (location.x > ofGetWidth() + diameter)
+        location.x  =   -diameter;
+	else if (location.x < -diameter)
+        location.x  =  ofGetWidth() + diameter;
 
-	if (location.y > ofGetHeight() + radius*2)
-        location.y  =  -radius*2;
-	else if (location.y < -radius*2)
-        location.y  =  ofGetHeight() + radius*2;
+	if (location.y > ofGetHeight() + diameter)
+        location.y  =  -diameter;
+	else if (location.y < -diameter)
+        location.y  =  ofGetHeight() + diameter;
+}
+void Ball::updateRadius(float fftValue){ 
+	if(fftValue > FFT_MAP_RADIUS)
+		fftValue = FFT_MAP_RADIUS;
+	radius = ofMap(fftValue, 0, FFT_MAP_RADIUS, RADIUS_MIN, RADIUS_MAX);
+}
+
+void Ball::applyFFTForce(ofVec2f FFTForce){
+	float angle = ofMap(FFTForce.x, 0, FFT_MAP_FORCE, 0,TWO_PI);
+	float length = ofMap(FFTForce.y, 0, FFT_MAP_FORCE, 0, FFT_FORCE_MAX);
+	FFTForce.set(sin(angle),cos(angle));
+	FFTForce = FFTForce * length;
+    applyForce(FFTForce);
+}
+
+void Ball::applyForce(ofVec2f force){
+	// force = force / mass //radius
+	acceleration = acceleration + force;   
+}
+
+void Ball::update(float vx,float vy,float r ,float c,float* params){
+	updateRadius(r);
+	applyFFTForce(ofVec2f(vx,vy));
+    updateColor(c);
 
 	velocity = velocity + acceleration;
+	velocity.limit(MAX_VELOCITY);
 	location = location + velocity;
-	velocity.limit(3);
 	acceleration = acceleration * 0;
-	noiseR += 0.02;
-	noiseG += 0.02;
-	noiseB += 0.02;
 
-
+    checkEdges();
 }
 
 void Ball::draw(){
