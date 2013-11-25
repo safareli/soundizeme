@@ -12,33 +12,34 @@ void soundizeMeApp::setup(){
     // Fixed framerate
     ofSetFrameRate(60);
 
-    //ofAddListener(ofEvents.fileDragEvent,this,&soundizeMeApp::onFileDragEvent);
 	// the fft needs to be smoothed out, so we create an array of floats
 	// for that purpose:
-	m_fftSmoothed = new float[8192];
-	for (int i = 0; i < 8192; i++){
+	m_nBandsToGet = 1024;
+	m_fftSmoothed = new float[m_nBandsToGet];
+	for (int i = 0; i < m_nBandsToGet; i++){
 		m_fftSmoothed[i] = 0;
 	}
 
-	m_nBandsToGet = 1024;
-/*
-1 sichqare X [-2,2]
-2 sichqare Y [-2,2]
-3 radiusi  [5,30]
-4 rgb	 setHex
-*/
+	/*
+	1 sichqare X [-2,2]
+	2 sichqare Y [-2,2]
+	3 radiusi  [5,30]
+	4 rgb	 setHex
+	*/
 	int balln = m_nBandsToGet/4;
 	for (int i = 0; i < balln; ++i)
 	{
-		ofVec2f location, velocity;
-		ofColor color;
-		location.set(ofRandomWidth(),ofRandomHeight());
-		float alpha = ofRandom(0,360);
-		velocity.set(sin(alpha),cos(alpha));
-		velocity*= ofRandom(0.5,2);
-		color.set(0, 0, 0);
+		float alpha 		= ofRandom(0,360);
+		ofVec2f location 	= ofVec2f(ofRandomWidth(),ofRandomHeight());
+		ofVec2f velocity 	= ofVec2f(sin(alpha),cos(alpha));
+		ofColor color 		= ofColor(ofRandom(255), ofRandom(255), ofRandom(255));
+		velocity *= ofRandom(0.5,2);
 		m_balls.push_back(Ball(location,velocity,color,20));
 	}
+
+	// slider1.setup("lerp", 0.1, 0,1);
+	// m_gui.setup("m_gui", 10, 10);
+	// m_gui.add(&slider1);
 
 }
 
@@ -61,12 +62,12 @@ void soundizeMeApp::update(){
 
 	for (int i = 0; i < m_balls.size(); i++){
 		m_balls.at(i).update(
-			m_fftSmoothed[i*4+0],
-			m_fftSmoothed[i*4+1],
-			m_fftSmoothed[i*4+2],
-			m_fftSmoothed[i*4+3],
-			m_debagFrame
+			sqrt(m_fftSmoothed[i*4+0]),
+			sqrt(m_fftSmoothed[i*4+1]),
+			sqrt(m_fftSmoothed[i*4+2]),
+			sqrt(m_fftSmoothed[i*4+3])
 		);
+		// slider1.getValue()
 	}
 	m_debagFrame = false;
 }
@@ -78,7 +79,7 @@ void soundizeMeApp::draw(){
 		m_balls.at(i).draw();
 	}
 
- 
+
 
 	// ofSetColor(255,255,255,255);
 	glBegin(GL_LINE_STRIP);
@@ -91,6 +92,8 @@ void soundizeMeApp::draw(){
 		// ofRect(i*width,ofGetHeight(),width,-(m_fftSmoothed[i] * 200) -5);
 	}
 	glEnd();
+    // m_gui.draw();
+
 }
 
 //--------------------------------------------------------------
@@ -143,7 +146,6 @@ void soundizeMeApp::windowResized(int w, int h){
 void soundizeMeApp::gotMessage(ofMessage msg){
 
 }
-
 //--------------------------------------------------------------
 void soundizeMeApp::dragEvent(ofDragInfo dragInfo){
 	if (dragInfo.files.size()){

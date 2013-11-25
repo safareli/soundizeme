@@ -1,7 +1,7 @@
 # depslib dependency file v1.0
 1376280832 source:c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\icon.rc
 
-1385249002 source:c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\src\main.cpp
+1385340191 source:c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\src\main.cpp
 	"ofMain.h"
 	"soundizeMeApp.h"
 
@@ -1475,12 +1475,13 @@
 	"ofCamera.h"
 	"ofEvents.h"
 
-1385252794 c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\src\soundizemeapp.h
+1385336648 c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\src\soundizemeapp.h
 	"ofMain.h"
 	"ball.h"
+	"ofgui.h"
 	<vector>
 
-1385254023 source:c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\src\soundizemeapp.cpp
+1385340096 source:c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\src\soundizemeapp.cpp
 	"soundizeMeApp.h"
 
 1385232022 c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\src\core\element\element.h
@@ -1533,9 +1534,96 @@
 	<cstdlib>
 	<ctime>
 
-1385247594 c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\src\ball.h
+1385340000 c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\src\ball.h
 	"ofMain.h"
 
-1385253539 source:c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\src\ball.cpp
+1385339996 source:c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\src\ball.cpp
 	"ball.h"
+
+1383606378 source:c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\addons\ofxmaxim\libs\fft.cpp
+	"fft.h"
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+	<string.h>
+
+1383606378 c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\addons\ofxmaxim\libs\fft.h
+	<Accelerate/Accelerate.h>
+
+1383606378 source:c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\addons\ofxmaxim\libs\maxiatoms.cpp
+	"maxiAtoms.h"
+	<iostream>
+	<fstream>
+	"sineTable.h"
+	<Accelerate/Accelerate.h>
+
+1383606378 c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\addons\ofxmaxim\libs\maxiatoms.h
+	<iostream>
+	"maximilian.h"
+	<list>
+	<vector>
+	"maxiGrains.h"
+
+1383606378 c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\addons\ofxmaxim\libs\maximilian.h
+	<iostream>
+	<fstream>
+	<string.h>
+	<cstdlib>
+	"math.h"
+
+1383606378 c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\addons\ofxmaxim\libs\maxigrains.h
+	"maximilian.h"
+	"accelerate/accelerate.h"
+	<list>
+
+1383606378 c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\addons\ofxmaxim\libs\sinetable.h
+
+1383606378 source:c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\addons\ofxmaxim\libs\maxifft.cpp
+	"maxiFFT.h"
+	"maximilian.h"
+	<iostream>
+	"math.h"
+
+1383606378 c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\addons\ofxmaxim\libs\maxifft.h
+	"fft.h"
+	"stddef.h"
+
+1383606378 source:c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\addons\ofxmaxim\libs\maxigrains.cpp
+	"maxiGrains.h"
+
+1383606378 source:c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\addons\ofxmaxim\libs\maximfcc.cpp
+	"maxiMFCC.h"
+
+1385331916 c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\addons\ofxmaxim\libs\maximfcc.h
+	"maxiFFT.h"
+	<math.h>
+	<iostream>
+	<cstdlib>
+	<Accelerate/Accelerate.h>
+
+1383606378 source:c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\addons\ofxmaxim\libs\maximilian.cpp
+	"maximilian.h"
+	"math.h"
+	"stb_vorbis.h"
+
+1383606378 c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\addons\ofxmaxim\libs\stb_vorbis.h
+	<stdio.h>
+
+1383606378 source:c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\addons\ofxmaxim\libs\stb_vorbis.c
+	"stb_vorbis.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	<math.h>
+	<malloc.h>
+
+1383606378 c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\addons\ofxmaxim\src\ofxmaxim.h
+	"maximilian.h"
+	"maxiFFT.h"
+	"maxiGrains.h"
+	"maxiMFCC.h"
+
+1385333527 c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\src\ofgui.h
+	"ofMain.h"
 
