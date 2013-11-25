@@ -4,30 +4,46 @@ Ball::Ball(ofVec2f _location,ofVec2f _velocity,ofColor _color,float _radius){
     velocity	=	_velocity;
     color		=	_color;
     radius		=	_radius;
+    noiseR		=	ofRandom(5000);
+    noiseG		=	ofRandom(5000);
+    noiseB		=	ofRandom(5000);
+
 }
 
-void Ball::update(float vx,float vy,float r ,float c){
- 
-  
- 
+void Ball::update(float vx,float vy,float r ,float c,float* params){
+
+// fftColorLerp
+// noiseColorLerp
+// noiseStep
+
 
         //limit r to 0.35
 	r = (r > 0.5) ? 0.5 :r;
-	radius = ofMap(r, 0, 0.5, 2, 50);
+	radius = ofMap(r, 0, 0.5, 10, 50);
 
 
 	float angle =ofMap(vy, 0, 0.34, 0,TWO_PI);
 	acceleration.set(sin(angle),cos(angle));
 	acceleration *=ofMap(vy, 0, 0.34, 0, 5);
 	if (velocity.dot(acceleration) < 0.9)
-	{
         acceleration /= radius;
-	}
 
-	ofColor icolor;
-    icolor.setHex(ofMap(r, 0, 0.35, 0, 255*255*255));
-    color.lerp(icolor,0.25);
+	if (r != 0){
+		ofColor icolor;
+	    icolor.setHex(ofMap(r, 0, 0.35, 0, 255*255*255));
+	    color.lerp(icolor,0.2);
+	};
+	ofColor disiredColor = ofColor(
+		ofMap(ofNoise(noiseR), 0, 1, 0, 255),
+		ofMap(ofNoise(noiseG), 0, 1, 0, 255),
+		ofMap(ofNoise(noiseB), 0, 1, 0, 255)
+	);
+	color.lerp(disiredColor,0.2);
+	if(color.getBrightness() < 150)
+		color.setBrightness(150);
 
+	if(color.getSaturation() < 100)
+		color.setSaturation(100);
 
 
 	if (location.x > ofGetWidth() + radius*2)
@@ -44,7 +60,9 @@ void Ball::update(float vx,float vy,float r ,float c){
 	location = location + velocity;
 	velocity.limit(3);
 	acceleration = acceleration * 0;
-
+	noiseR += 0.2;
+	noiseG += 0.2;
+	noiseB += 0.2;
 
 
 }

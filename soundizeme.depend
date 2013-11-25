@@ -1475,13 +1475,13 @@
 	"ofCamera.h"
 	"ofEvents.h"
 
-1385336648 c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\src\soundizemeapp.h
+1385392326 c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\src\soundizemeapp.h
 	"ofMain.h"
 	"ball.h"
 	"ofgui.h"
 	<vector>
 
-1385340096 source:c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\src\soundizemeapp.cpp
+1385392554 source:c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\src\soundizemeapp.cpp
 	"soundizeMeApp.h"
 
 1385232022 c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\src\core\element\element.h
@@ -1534,10 +1534,10 @@
 	<cstdlib>
 	<ctime>
 
-1385340000 c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\src\ball.h
+1385390431 c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\src\ball.h
 	"ofMain.h"
 
-1385339996 source:c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\src\ball.cpp
+1385391082 source:c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\apps\myapps\soundizeme\src\ball.cpp
 	"ball.h"
 
 1383606378 source:c:\users\sapara\dropbox\work\of_v0.8.0_win_cb_release\addons\ofxmaxim\libs\fft.cpp

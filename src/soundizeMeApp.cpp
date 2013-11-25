@@ -36,10 +36,19 @@ void soundizeMeApp::setup(){
 		velocity *= ofRandom(0.5,2);
 		m_balls.push_back(Ball(location,velocity,color,20));
 	}
+// fftColorLerp
+// noiseColorLerp
+// noiseStep
 
-	// slider1.setup("lerp", 0.1, 0,1);
-	// m_gui.setup("m_gui", 10, 10);
-	// m_gui.add(&slider1);
+	slider1.setup("slider1", 50, 0, 100);
+	slider2.setup("slider2", 50, 0, 100);
+	slider3.setup("slider3", 50, 0, 100);
+	slider4.setup("slider4", 50, 0, 100);
+	m_gui.setup("params", 10, 10);
+	m_gui.add(&slider1);
+	m_gui.add(&slider2);
+	m_gui.add(&slider3);
+	m_gui.add(&slider4);
 
 }
 
@@ -60,15 +69,21 @@ void soundizeMeApp::update(){
 
 	}
 
+	float * paramns = new float[4];
+	paramns[0] = slider1.getValue();
+	paramns[1] = slider2.getValue();
+	paramns[2] = slider3.getValue();
+	paramns[3] = slider4.getValue();
 	for (int i = 0; i < m_balls.size(); i++){
 		m_balls.at(i).update(
 			sqrt(m_fftSmoothed[i*4+0]),
 			sqrt(m_fftSmoothed[i*4+1]),
 			sqrt(m_fftSmoothed[i*4+2]),
-			sqrt(m_fftSmoothed[i*4+3])
+			sqrt(m_fftSmoothed[i*4+3]),
+			paramns
 		);
-		// slider1.getValue()
 	}
+	delete[] paramns;
 	m_debagFrame = false;
 }
 
@@ -92,7 +107,7 @@ void soundizeMeApp::draw(){
 		// ofRect(i*width,ofGetHeight(),width,-(m_fftSmoothed[i] * 200) -5);
 	}
 	glEnd();
-    // m_gui.draw();
+    m_gui.draw();
 
 }
 
@@ -107,6 +122,9 @@ void soundizeMeApp::keyPressed(int key){
 		// ofSaveViewport("ofSaveViewport.jpg");
 		// ofSaveScreen("ofSaveScreen.jpg");
 		ofSaveFrame();
+	}else if(key == 'p'){
+		m_audio.setPaused(m_isPlaying);
+		m_isPlaying = !m_isPlaying;
 	}
 }
 
@@ -151,6 +169,7 @@ void soundizeMeApp::dragEvent(ofDragInfo dragInfo){
 	if (dragInfo.files.size()){
         m_audio.loadSound(dragInfo.files.at(0),false);
         m_audio.play();
+        m_isPlaying = true;
 
 	}
 }
