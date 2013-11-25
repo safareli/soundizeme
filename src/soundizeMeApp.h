@@ -2,7 +2,7 @@
 
 #include "ofMain.h"
 #include "ball.h"
-#include "ofgui.h"
+//include "ofgui.h"
 #include <vector>
 
 class soundizeMeApp : public ofBaseApp{
@@ -25,8 +25,7 @@ class soundizeMeApp : public ofBaseApp{
         ofSoundPlayer       m_audio;
         float *             m_fftSmoothed;
         int                 m_nBandsToGet;
-        bool                m_debagFrame;
         bool                m_isPlaying;
-        ofSlider slider1, slider2, slider3, slider4;
-        ofGuiCollection m_gui;
+        // ofSlider slider1, slider2, slider3, slider4;
+        // ofGuiCollection m_gui;
 };

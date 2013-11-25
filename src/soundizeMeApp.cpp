@@ -32,19 +32,19 @@ void soundizeMeApp::setup(){
         ofVec2f location    = ofVec2f(ofRandomWidth(),ofRandomHeight());
         ofVec2f velocity    = ofVec2f(sin(alpha),cos(alpha));
         ofColor color       = ofColor(ofRandom(255), ofRandom(255), ofRandom(255));
-        velocity *= ofRandom(0.5,2);
+        velocity           *= ofRandom(0.5,2);
         m_balls.push_back(Ball(location,velocity,color,20));
     }
 
-    slider1.setup("slider1", 50, 0, 100);
-    slider2.setup("slider2", 50, 0, 100);
-    slider3.setup("slider3", 50, 0, 100);
-    slider4.setup("slider4", 50, 0, 100);
-    m_gui.setup("params", 10, 10);
-    m_gui.add(&slider1);
-    m_gui.add(&slider2);
-    m_gui.add(&slider3);
-    m_gui.add(&slider4);
+    // slider1.setup("slider1", 50, 0, 100);
+    // slider2.setup("slider2", 50, 0, 100);
+    // slider3.setup("slider3", 50, 0, 100);
+    // slider4.setup("slider4", 50, 0, 100);
+    // m_gui.setup("params", 10, 10);
+    // m_gui.add(&slider1);
+    // m_gui.add(&slider2);
+    // m_gui.add(&slider3);
+    // m_gui.add(&slider4);
 
 }
 
@@ -65,22 +65,27 @@ void soundizeMeApp::update(){
 
     }
 
-    float * paramns = new float[4];
-    paramns[0] = slider1.getValue();
-    paramns[1] = slider2.getValue();
-    paramns[2] = slider3.getValue();
-    paramns[3] = slider4.getValue();
+    // float * paramns = new float[4];
+    // paramns[0] = slider1.getValue();
+    // paramns[1] = slider2.getValue();
+    // paramns[2] = slider3.getValue();
+    // paramns[3] = slider4.getValue();
+    //
     for (int i = 0; i < m_balls.size(); i++){
-        m_balls.at(i).update(
-            sqrt(m_fftSmoothed[i*4+0]),
-            sqrt(m_fftSmoothed[i*4+1]),
-            sqrt(m_fftSmoothed[i*4+2]),
-            sqrt(m_fftSmoothed[i*4+3]),
-            paramns
-        );
+        float r,x,y,c;
+        Ball *ball = & m_balls.at(i);
+        r = sqrt(m_fftSmoothed[i*4+0]);
+        x = sqrt(m_fftSmoothed[i*4+1]);
+        y = sqrt(m_fftSmoothed[i*4+2]);
+        c = sqrt(m_fftSmoothed[i*4+3]);
+        ball->updateRadius(r);
+        ball->applyFFTForce(ofVec2f(x,y));
+        ball->updateColor(c);
+        // ball->separate(m_balls);
+        ball->update();
+        ball->checkEdges();
     }
-    delete[] paramns;
-    m_debagFrame = false;
+    // delete[] paramns;
 }
 
 //--------------------------------------------------------------
@@ -89,20 +94,16 @@ void soundizeMeApp::draw(){
     for (int i = 0; i < m_balls.size(); ++i){
         m_balls.at(i).draw();
     }
-
-    // ofSetColor(255,255,255,255);
+    
+    ofSetColor(ofColor(255,255,255));
     glBegin(GL_LINE_STRIP);
     glVertex2f(0,ofGetHeight());
-    m_nBandsToGet;
     for (int i = 0;i < m_nBandsToGet; i++){
-        // (we use negative height here, because we want to flip them
-        // because the top corner is 0,0)
         glVertex2f(i+1,ofGetHeight() - (m_fftSmoothed[i] * 200));
-        // ofRect(i*width,ofGetHeight(),width,-(m_fftSmoothed[i] * 200) -5);
     }
-
     glEnd();
-    m_gui.draw();
+
+    // m_gui.draw();
 }
 
 //--------------------------------------------------------------
@@ -111,10 +112,7 @@ void soundizeMeApp::keyPressed(int key){
         cout << "m_balls.size()         " << m_balls.size() << endl;
         cout << "ofGetFrameRate()       " << ofGetFrameRate() << endl;
         cout << "ofGetTargetFrameRate() " << ofGetTargetFrameRate() << endl;
-        m_debagFrame = true;
     }else if(key == 's'){
-        // ofSaveViewport("ofSaveViewport.jpg");
-        // ofSaveScreen("ofSaveScreen.jpg");
         ofSaveFrame();
     }else if(key == 'p'){
         m_audio.setPaused(m_isPlaying);
