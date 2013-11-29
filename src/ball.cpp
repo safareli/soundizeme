@@ -1,5 +1,8 @@
 #include "ball.h"
-Ball::Ball(ofVec2f _location,ofVec2f _velocity,ofColor _color,float _radius){
+Ball::~Ball(){
+}
+Ball::Ball(ofVec2f _location,ofVec2f _velocity,ofColor _color,float _radius,std::vector<int> &_FFTids){
+    FFTids      =   _FFTids;
     location    =   _location;
     velocity    =   _velocity;
     color       =   _color;
@@ -7,7 +10,6 @@ Ball::Ball(ofVec2f _location,ofVec2f _velocity,ofColor _color,float _radius){
     noiseR      =   ofRandom(5000);
     noiseG      =   ofRandom(5000);
     noiseB      =   ofRandom(5000);
-
 }
 void Ball::updateColor(float fftValue){
     if (fftValue != 0){
@@ -85,7 +87,16 @@ void Ball::applyForce(ofVec2f force){
     acceleration = acceleration + force;
 }
 
-void Ball::update(){ 
+void Ball::FFTupdate(float* FFTSmoothed){
+    float   r = sqrt(FFTSmoothed[FFTids.at(0)]),
+            x = sqrt(FFTSmoothed[FFTids.at(1)]),
+            y = sqrt(FFTSmoothed[FFTids.at(2)]),
+            c = sqrt(FFTSmoothed[FFTids.at(3)]);
+    updateRadius(r);
+    applyFFTForce(ofVec2f(x,y));
+    updateColor(c);
+}
+void Ball::update(){
     velocity = velocity + acceleration;
     velocity.limit(MAX_VELOCITY);
     location = location + velocity;

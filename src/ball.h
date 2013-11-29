@@ -20,9 +20,10 @@
 
 class Ball {
     public:
-        Ball(ofVec2f _location,ofVec2f _velocity,ofColor _color,float _radius);
-
+        Ball(ofVec2f _location,ofVec2f _velocity,ofColor _color,float _radius,std::vector<int> &_FFTids);
+        ~Ball();
         void update();
+        void FFTupdate(float* FFTSmoothed);
         void draw();
         void separate(std::vector<Ball> & balls);
         void checkEdges();
@@ -30,10 +31,11 @@ class Ball {
         void updateRadius(float fftValue);
         void applyFFTForce(ofVec2f FFTForce);
 
-        ofVec2f location, velocity, acceleration;
-        ofColor color;
-        float radius;
-        float noiseR,noiseG,noiseB;
+        std::vector<int>    FFTids;
+        ofVec2f             location, velocity, acceleration;
+        ofColor             color;
+        float               radius;
+        float               noiseR,noiseG,noiseB;
     private:
         void circle(ofVec2f _location, float _radius, ofColor _color);
         void applyForce(ofVec2f force);
