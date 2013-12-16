@@ -64,7 +64,7 @@ void soundizeMeApp::setup(){
     // m_gui.add(&slider2);
     // m_gui.add(&slider3);
     // m_gui.add(&slider4);
-    
+
     // ofSetBackgroundAuto(false);
     // ofBackground(0);
 }
@@ -123,26 +123,44 @@ void soundizeMeApp::draw(){
     glEnd();
 
     // m_gui.draw();
+    // if(bInfoText) {
+    //     stringstream ss;
+    //     ss <<"Framerate: " << ofToString(ofGetFrameRate(),0) << "\n";
+    //     ss <<"(f): Toggle Fullscreen"<<endl;
+    //     ss <<"(s): Save Frame"<<endl;
+    //     ss <<"(p): Pause Player"<<endl;
+    //     ss <<"balls size"<<m_balls.size()<<endl;
+    //     ss <<"(o): SystemLoadDialog"<<endl;
+    //     ofDrawBitmapString(ss.str().c_str(), 20, 20);
+    // }
 }
 
 //--------------------------------------------------------------
 void soundizeMeApp::keyPressed(int key){
-    if (key == 'd'){
-        cout << "m_balls.size()         " << m_balls.size() << endl;
-        cout << "ofGetFrameRate()       " << ofGetFrameRate() << endl;
-        cout << "ofGetTargetFrameRate() " << ofGetTargetFrameRate() << endl;
-    }else if(key == 'o'){
-        ofFileDialogResult result = ofSystemLoadDialog("open audio file");
-        if (result.bSuccess){
-            m_audio.loadSound(result.getPath(),true);
-            m_audio.play();
-            m_isPlaying = true;
-        }
-    }else if(key == 's'){
-        ofSaveFrame();
-    }else if(key == 'p'){
-        m_audio.setPaused(m_isPlaying);
-        m_isPlaying = !m_isPlaying;
+    switch(key){
+        case 'f':
+            ofToggleFullscreen();
+        break;
+        case 's':
+            ofSaveFrame();
+        break;
+        case 'p':
+            m_audio.setPaused(m_isPlaying);
+            m_isPlaying = !m_isPlaying;
+        break;
+        case 'd':
+            cout << "m_balls.size()         " << m_balls.size() << endl;
+            cout << "ofGetFrameRate()       " << ofGetFrameRate() << endl;
+            cout << "ofGetTargetFrameRate() " << ofGetTargetFrameRate() << endl;
+        break;
+        case 'o':
+            ofFileDialogResult result = ofSystemLoadDialog("open audio file");
+            if (result.bSuccess){
+                m_audio.loadSound(result.getPath(),true);
+                m_audio.play();
+                m_isPlaying = true;
+            }
+        break;
     }
 }
 

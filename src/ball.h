@@ -5,9 +5,15 @@
 #include <vector>
 
 
+#define _USE_MATH_DEFINES
+#include <math.h>
+
+#define FFT_MAP_RADIUS      0.5
+#define RADIUS_MIN          5
+#define RADIUS_MAX          50
+
 #define MAX_VELOCITY        3
 #define MAX_FORCE           6
-#define FFT_MAP_RADIUS      0.5
 #define FFT_MAP_FORCE       0.36
 #define FFT_FORCE_MAX       5
 #define FFT_COLOR_LERP      0.175
@@ -15,8 +21,6 @@
 #define MIN_SATURATION      100
 #define MIN_BRIGHTNESS      150
 #define NOISE_STEP          0.02
-#define RADIUS_MIN          5
-#define RADIUS_MAX          50
 
 class Ball {
     public:
